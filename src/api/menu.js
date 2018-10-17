@@ -10,7 +10,7 @@ export default {
  */
 function getRoleMenus(params) {
   return service({
-    url:`/menu/getRoleMenus/${params.roleId}`,
-    method:'get'
+    url: `/menu/getRoleMenus/${params.roleId}`,
+    method: 'get'
   });
 }
