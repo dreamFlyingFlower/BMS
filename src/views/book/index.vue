@@ -24,9 +24,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@mixin li{
+  border:10px solid yellow;
+}
 ul{
   li{
-    // list-style: circle;
+    @include li
   }
 }
 </style>
