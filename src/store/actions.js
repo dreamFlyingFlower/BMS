@@ -1,14 +1,42 @@
 import apiUser from '@/api/user';
 import apiRole from '@/api/role';
 import common from '@/utils/common';
-import { SSL_OP_COOKIE_EXCHANGE } from 'constants';
 
 export default {
+  /**
+   * 获得用户的基本信息,存入session,防止页面刷新,存入store是为了vue环境刷新
+   */
+  GetUserInfo({commit},params){
+    return new Promise((resolve,reject)=>{
+      apiUser.login(params).then(resp=>{
+        if(resp !== undefined){
+          let data = resp.data;
+          common.setSession("SET_USER",data);
+          common.setSession('SET_ROLES', data.roles);
+          common.setSession('SET_TOKEN', data.token);
+          commit("SET_USER",data);
+          commit("SET_ROLES",data.roles);
+          commit("SET_TOKEN",data.token);
+          resolve(resp);
+        }else{
+          reject(resp);
+        }
+      });
+    });
+  },
+  ClearUserInfo({commit}){
+    commit("SET_USER",null);
+    commit("SET_ROLES",null);
+    commit("SET_DEPARTS",null);
+    commit("SET_MENUS",null);
+    commit("SET_BUTTONS",null);
+    commit("SET_TOKEN",'');
+  },
   // 获取角色权限菜单
   GetRoleMenu() {
     return new Promise((resolve, reject) => {
       apiRole.getRoleMenu({roleId: common.getSession("SET_ROLES")[0].roleId}).then(response => {
-        const data = response.data;
+        let data = response.data;
         if (data[0].children && data[0].children.length) {
           common.setSession("SET_MENUS", data[0].children);
         } else {

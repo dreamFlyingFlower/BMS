@@ -6,8 +6,6 @@
 
     <div class="right-menu">
       <template v-if="device!=='mobile'">
-        <error-log class="errLog-container right-menu-item"/>
-
         <el-tooltip :content="$t('navbar.size')" effect="dark" placement="bottom">
           <size-select class="international right-menu-item"/>
         </el-tooltip>
@@ -17,7 +15,7 @@
 
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="user.userIcon+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img :src="userIcon+'?imageView2/1/w/80/h/80'" class="user-avatar">
           <i class="el-icon-caret-bottom"/>
         </div>
         <el-dropdown-menu slot="dropdown">
@@ -45,20 +43,24 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
-import ErrorLog from '@/components/ErrorLog'
 import SizeSelect from '@/components/SizeSelect'
 import LangSelect from '@/components/LangSelect'
 import ThemePicker from '@/components/ThemePicker'
+import userIcon from "@/assets/images/user.png"
 
 export default {
   name:'Navbar',
   components: {
     Breadcrumb,
     Hamburger,
-    ErrorLog,
     SizeSelect,
     LangSelect,
     ThemePicker
+  },
+  data(){
+    return {
+      userIcon : userIcon
+    }
   },
   computed: {
     ...mapGetters([
@@ -66,6 +68,10 @@ export default {
       'user',
       'device'
     ])
+  },
+  created(){
+    console.log(this.user);
+    this.userIcon = this.user.userIcon ? this.user.userIcon : this.userIcon
   },
   methods: {
     toggleSideBar() {
@@ -93,10 +99,6 @@ export default {
   }
   .breadcrumb-container{
     float: left;
-  }
-  .errLog-container {
-    display: inline-block;
-    vertical-align: top;
   }
   .right-menu {
     float: right;

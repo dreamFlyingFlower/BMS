@@ -5,7 +5,8 @@ import router from './index';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import common from '../utils/common';
-import apiMenu from '@/api/menu';
+import apiRole from '@/api/role';
+import {Message} from "element-ui";
 
 NProgress.configure({
   showSpinner: false
@@ -21,9 +22,14 @@ router.beforeEach((to, from, next) => {
     if (token && token !== "undefined") {
       if(from.path === "/login"){
         // 如果是从login跳过来的,则请求菜单数据
-        apiMenu.getRoleMenu({roleId:(common.getSession("SET_ROLES")[0]).roleId}).then(resp=>{
+        apiRole.getRoleMenu({roleId:(common.getSession("SET_ROLES")[0]).roleId}).then(resp=>{
           if(resp === undefined){
-            $this.message.error("this user has no menus");
+            Message({
+              message: "this role has no menus",
+              type: 'error',
+              duration: 3000
+            });
+            return;
           }
           common.setSession("SET_MENUS",resp.data[0].children)
           next();

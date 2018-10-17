@@ -15,7 +15,9 @@ export default{
   aesEncode,
   aesDecode,
   urlEncode,
-  urlDecode
+  urlDecode,
+  paramEncode,
+  paramDecode
 }
 
 function base64Encode(value){
@@ -72,14 +74,37 @@ function aesDecode(){
   }
 }
 
+/**
+ * 对url整体进行编码,特殊字符串不编码,但是不要带%,会报错,若必须有,则将%换成%25
+ */
 function urlEncode(value){
+  if(common.isBlank(value)){
+    throw new TypeError("value can not be null");
+  }
+  return encodeURI(value)
+}
+
+function urlDecode(value){
+  if(common.isBlank(value)){
+    return;
+  }
+  return decodeURI(value)
+}
+
+/**
+ * 只对参数进行编码,特殊字符串也进行编码,但是不要带%,会报错,若必须有,则将%换成%25
+ */
+function paramEncode(value){
   if(common.isBlank(value)){
     throw new TypeError("value can not be null");
   }
   return encodeURIComponent(value)
 }
 
-function urlDecode(value){
+/**
+ * 只对参数进行解码
+ */
+function paramDecode(value){
   if(common.isBlank(value)){
     return;
   }

@@ -113,7 +113,9 @@ export default {
 
   },
   created() {
-    
+    // 清楚session和store,防止残留
+    sessionStorage.clear();
+    this.$store.dispatch("ClearUserInfo");
     // window.addEventListener('hashchange', this.afterQRScan)
   },
   destroyed() {
@@ -131,17 +133,10 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true;
-          apiUser.login(this.loginForm).then(resp => {
-            if(resp === undefined){
-              this.loading =false;
-              return;
-            }
-            let data = resp.data;
-            common.setSession("SET_USER",data);
-            common.setSession('SET_ROLES', data.roles);
-            common.setSession('SET_TOKEN', data.token);
-            this.$router.push("/system");
+          this.$store.dispatch("GetUserInfo",this.loginForm).then(()=>{
+            this.$router.push("/book");
           });
+          this.loading =false;
         } else {
           return false;
         }

@@ -82,6 +82,17 @@ export default new Router({
           meta:{'title':'button'}
         }
       ]
+    },
+    {
+      path:"",
+      component:home,
+      children:[
+        {
+          path:"book",
+          name:"book",
+          component:()=>import("@/views/book")
+        }
+      ]
     }
   ]
 })
