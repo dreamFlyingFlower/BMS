@@ -1,5 +1,6 @@
 <template>
   <div id="book">
+    <tree :datas="menus"></tree>
     <ul>
       <li>测试1</li>
       <li>测试2</li>
@@ -11,10 +12,14 @@
 </template>
 
 <script>
+import Tree from "Component/Tree";
 export default {
+  components:{
+    Tree
+  },
   data(){
     return {
-
+      menus : this.$store.getters.menus
     }
   },
   created(){
