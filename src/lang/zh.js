@@ -66,7 +66,9 @@ export default {
     userSetting:"用户设置",
     departSettind:"部门设置",
     roleSetting:"角色设置",
-    buttonSetting:"按钮设置"
+    buttonSetting:"按钮设置",
+    book:"图书",
+    bookManager:"图书管理"
   },
   navbar: {
     logOut: '退出登录',

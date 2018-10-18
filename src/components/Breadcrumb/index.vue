@@ -12,6 +12,9 @@
 <script>
 import { generateTitle } from '@/utils/i18n'
 
+/**
+ * 显示当前用户打开的页面路径,以及打开过的标签
+ */
 export default {
   data() {
     return {
@@ -30,8 +33,6 @@ export default {
     generateTitle,
     getBreadcrumb() {
       let matched = this.$route.matched.filter(item => item.name)
-      console.log(this.$route);
-      console.log(matched);
       const first = matched[0]
       if (first && first.name.trim().toLocaleLowerCase() !== 'Home'.toLocaleLowerCase()) {
         matched = [{ path: '/home', meta: { title: 'home' }}].concat(matched)

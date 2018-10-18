@@ -1,7 +1,7 @@
 <template>
   <div :class="classObj" class="app-wrapper">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside"/>
-    <Menu class="sidebar-container"/>
+    <left class="sidebar-container"/>
     <div class="main-container">
       <navbar/>
       <tags-view/>
@@ -12,7 +12,7 @@
 
 <script>
 import Navbar from './sidebar/navbar';
-import Menu from './left/index';
+import Left from './left';
 import AppMain from './sidebar/appMain';
 import TagsView from './sidebar/tagsView';
 import ResizeMixin from './mixin/resizeHandler';
@@ -21,7 +21,7 @@ export default {
   name: 'Home',
   components: {
     Navbar,
-    Menu,
+    Left,
     AppMain,
     TagsView
   },

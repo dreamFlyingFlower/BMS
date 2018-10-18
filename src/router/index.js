@@ -1,19 +1,23 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import home from '@/views/home';
+import Home from '@/views/home';
 
 Vue.use(Router);
 
+/**
+ * vue的目录跳转,除了重定向的之后都要写meta,并且meta里要写title,用来国际化语言,不然会有页面显示错误
+ * 所有的name都以大写开头,component都以大写开头,其他驼峰
+ */
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       redirect:"login"
     },
     {
       path:'/login',
-      name:'login',
+      name:'Login',
       component:()=>import('@/views/user/login'),
       meta:{'title':'login'}
     },
@@ -31,20 +35,20 @@ export default new Router({
     },
     {
       path:"user",
-      name:"user",
+      name:"User",
       redirect:"user/register",
-      component:home,
+      component:Home,
       meta:{title:"user"},
       children:[
         {
           path:'/userInfo',
-          name:'userInfo',
+          name:'UserInfo',
           component:()=>import('@/views/user/userInfo'),
           meta:{'title':'userInfo'}
         },
         {
           path:"register",
-          name:"register",
+          name:"Register",
           component:()=>import("@/views/user/register"),
           meta:{title:"register"}
         }
@@ -52,45 +56,46 @@ export default new Router({
     },
     {
       path:'/system',
-      name:'system',
+      name:'System',
       redirect:"/system/user",
-      component:()=>import('@/views/system/index'),
-      meta:{'title':'system'},
+      component:Home,
+      meta:{'title':'sysSetting'},
       children:[
         {
           path:'user',
-          name:'sysUser',
+          name:'SysUser',
           component:()=>import('@/views/system/user'),
-          meta:{'title':'user'}
+          meta:{'title':'userSetting'}
         },
         {
           path:'role',
-          name:'sysRole',
+          name:'SysRole',
           component:()=>import('@/views/system/role'),
-          meta:{'title':'role'}
+          meta:{'title':'roleSetting'}
         },
         {
           path:'menu',
-          name:'sysMenu',
+          name:'SysMenu',
           component:()=>import('@/views/system/menu'),
-          meta:{'title':'menu'}
+          meta:{'title':'menuSetting'}
         },
         {
           path:'button',
-          name:'sysButton',
+          name:'SysButton',
           component:()=>import('@/views/system/button'),
-          meta:{'title':'button'}
+          meta:{'title':'buttonSetting'}
         }
       ]
     },
     {
       path:"",
-      component:home,
+      component:Home,
       children:[
         {
           path:"book",
-          name:"book",
-          component:()=>import("@/views/book")
+          name:"Book",
+          component:()=>import("@/views/book"),
+          meta:{title:"book"}
         }
       ]
     }

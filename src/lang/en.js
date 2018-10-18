@@ -66,7 +66,9 @@ export default {
     userSetting:"User Setting",
     departSettind:"Department Setting",
     roleSetting:"Role Setting",
-    buttonSetting:"Button Setting"
+    buttonSetting:"Button Setting",
+    book:"Book",
+    bookManager:"Book Manager"
   },
   navbar: {
     logOut: 'Log Out',

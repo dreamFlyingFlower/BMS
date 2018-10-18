@@ -34,7 +34,7 @@
   import MenuItem from './menuItem'
 
   export default {
-    name: 'menuTree',
+    name: 'MenuTree',
     components: {
       MenuItem
     },
@@ -58,7 +58,6 @@
       }
     },
     created(){
-      console.log(this.item);
     },
     methods: {
       resolvePath(menuId){

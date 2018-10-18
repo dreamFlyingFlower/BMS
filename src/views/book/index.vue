@@ -24,12 +24,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@mixin li{
-  border:10px solid yellow;
-}
-ul{
-  li{
-    @include li
-  }
-}
+// @mixin li{
+//   border:10px solid yellow;
+// }
+// ul{
+//   li{
+//     @include li
+//   }
+// }
 </style>

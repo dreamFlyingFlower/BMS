@@ -27,7 +27,7 @@ import ScrollPane from '@/components/ScrollPane'
 import { generateTitle } from '@/utils/i18n'
 
 export default {
-  name:'AppMain',
+  name:'TagsView',
   components: { ScrollPane },
   data() {
     return {

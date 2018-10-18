@@ -19,8 +19,8 @@ router.beforeEach((to, from, next) => {
     next();
   }else{
     let token = common.getSession("SET_TOKEN");
-    if (token && token !== "undefined") {
-      if(from.path === "/login"){
+    if (token && token !== "undefined" && token !== undefined) {
+      if(from.path === "/login" || from.path === "/"){
         // 如果是从login跳过来的,则请求菜单数据
         apiRole.getRoleMenu({roleId:(common.getSession("SET_ROLES")[0]).roleId}).then(resp=>{
           if(resp === undefined){

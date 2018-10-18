@@ -4,7 +4,8 @@ import service from '@/utils/service';
 
 export default {
   login,
-  logout
+  logout,
+  getPages
 };
 
 function login(params) {
@@ -15,9 +16,16 @@ function login(params) {
   });
 }
 
-function logout() {
+function logout(params) {
   return service({
-    url: '/login/logout',
-    method: 'post'
+    url: `/user/logout/${params.userId}`,
+    method: 'get'
+  });
+}
+
+function getPages(params){
+  return service({
+    url:"/user/getPages",
+    params
   });
 }

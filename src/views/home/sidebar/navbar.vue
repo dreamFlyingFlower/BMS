@@ -70,7 +70,6 @@ export default {
     ])
   },
   created(){
-    console.log(this.user);
     this.userIcon = this.user.userIcon ? this.user.userIcon : this.userIcon
   },
   methods: {
