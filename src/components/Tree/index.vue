@@ -6,14 +6,16 @@
 
 <script>
 export default {
-  props:["datas"],
+  props:["datas","title"],
   data(){
     return {
       defaultProps:{
         children:"children",
-        label:"menuName"
+        label:this.title
       }
     }
+  },
+  created(){
   },
   methods:{
     handle(data){

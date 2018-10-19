@@ -6,12 +6,13 @@ import router from './router';
 import store from './store';//引入vuex的store
 import ElementUI from 'element-ui';
 import i18n from './lang'; //语言配置
+import 'normalize.css/normalize.css';
 import 'element-ui/lib/theme-chalk/index.css'; //默认主题
 import Global from './global'; // vue全局变量和方法
 import './icons'; // svg-icon
 import '@/styles/index.scss';
-import 'normalize.css/normalize.css';
 import './router/filter';
+// @import "./assets/css/common";
 
 Vue.config.productionTip = false;
 // 使用语言选择,在vue文件中使用$t(key),其中key是lang/zh中的key,会根据文件自动切换

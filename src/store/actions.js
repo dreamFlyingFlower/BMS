@@ -4,6 +4,17 @@ import common from '@/utils/common';
 
 export default {
   /**
+   * 清楚用户所有信息
+   */
+  ClearUserInfo({commit}){
+    commit("SET_USER",null);
+    commit("SET_ROLES",null);
+    commit("SET_DEPARTS",null);
+    commit("SET_MENUS",null);
+    commit("SET_BUTTONS",null);
+    commit("SET_TOKEN",'');
+  },
+  /**
    * 获得用户的基本信息,存入session,防止页面刷新,存入store是为了vue环境刷新
    */
   GetUserInfo({commit},params){
@@ -24,21 +35,14 @@ export default {
       });
     });
   },
-  ClearUserInfo({commit}){
-    commit("SET_USER",null);
-    commit("SET_ROLES",null);
-    commit("SET_DEPARTS",null);
-    commit("SET_MENUS",null);
-    commit("SET_BUTTONS",null);
-    commit("SET_TOKEN",'');
-  },
   // 获取角色权限菜单
-  GetRoleMenu() {
+  GetRoleMenu({commit}) {
     return new Promise((resolve, reject) => {
       apiRole.getRoleMenu({roleId: common.getSession("SET_ROLES")[0].roleId}).then(response => {
         let data = response.data;
         if (data[0].children && data[0].children.length) {
           common.setSession("SET_MENUS", data[0].children);
+          commit("SET_MENUS",data[0].children);
         } else {
           reject(response);
         }

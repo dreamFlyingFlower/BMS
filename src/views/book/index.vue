@@ -1,6 +1,6 @@
 <template>
   <div id="book">
-    <tree :datas="menus"></tree>
+    <tree :datas="menus" :title="title"></tree>
     <ul>
       <li>测试1</li>
       <li>测试2</li>
@@ -19,12 +19,10 @@ export default {
   },
   data(){
     return {
-      menus : this.$store.getters.menus
+      menus : this.$store.getters.menus,
+      title:"menuName"
     }
   },
-  created(){
-
-  }
 }
 </script>
 

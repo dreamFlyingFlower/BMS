@@ -1,7 +1,7 @@
 <template>
   <el-scrollbar wrap-class="scrollbar-wrapper">
     <el-menu :show-timeout="200" :default-active="$route.path" :collapse="isCollapse" mode="vertical" background-color="#304156" text-color="#bfcbd9" active-text-color="#409EFF">
-      <menu-tree v-for="route in menus" :key="route.menuId" :item="route" :baseIndex="route.menuId+''" />
+      <menu-tree v-for="menu in menus" :key="menu.menuId" :item="menu" :baseIndex="menu.menuId+''" />
     </el-menu>
   </el-scrollbar>
 </template>
@@ -20,8 +20,6 @@
       return {
         menus : common.getSession("SET_MENUS")
       }
-    },
-    created(){
     },
     computed: {
       ...mapGetters([

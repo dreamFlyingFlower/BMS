@@ -5,8 +5,8 @@ import router from './index';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import common from '../utils/common';
-import apiRole from '@/api/role';
 import {Message} from "element-ui";
+import store from "../store";
 
 NProgress.configure({
   showSpinner: false
@@ -22,18 +22,29 @@ router.beforeEach((to, from, next) => {
     if (token && token !== "undefined" && token !== undefined) {
       if(from.path === "/login" || from.path === "/"){
         // 如果是从login跳过来的,则请求菜单数据
-        apiRole.getRoleMenu({roleId:(common.getSession("SET_ROLES")[0]).roleId}).then(resp=>{
-          if(resp === undefined){
-            Message({
-              message: "this role has no menus",
-              type: 'error',
-              duration: 3000
-            });
-            return;
+        store.dispatch("GetRoleMenu",common.getSession("SET_ROLES")[0].roleId).then((resp)=>{
+          if(resp !== undefined){
+            next();
           }
-          common.setSession("SET_MENUS",resp.data[0].children)
-          next();
+        }).catch((error)=>{
+          Message({
+            message: error.message,
+            type: 'error',
+            duration: 3000
+          });
         });
+        // apiRole.getRoleMenu({roleId:(common.getSession("SET_ROLES")[0]).roleId}).then(resp=>{
+        //   if(resp === undefined){
+        //     Message({
+        //       message: "this role has no menus",
+        //       type: 'error',
+        //       duration: 3000
+        //     });
+        //     return;
+        //   }
+        //   common.setSession("SET_MENUS",resp.data[0].children)
+        //   next();
+        // });
       }else if (!common.getSession("SET_MENUS")) {
         // 权限菜单失效,跳到登录界面,不重新请求,带上要去的地方
         next({path:"/login",query:{referrer:to.fullPath}});

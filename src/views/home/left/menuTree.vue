@@ -1,6 +1,6 @@
 <template>
   <div v-if="item" class="menu-wrapper">
-    <template v-if="item.children.length === 0">
+    <template v-if="!item.children">
       <a :href="item.menuUrl" target="_blank" @click="clickLink(item.menuUrl,$event)">
         <el-menu-item :index="resolvePath(item.menuId)" :class="{'submenu-title-noDropdown':!isNest}">
           <menu-item v-if="item.menuUrl" :icon="item.menuIcon" :title="generateTitle(item.menuI18n)" />
@@ -14,7 +14,7 @@
       </template>
 
       <template v-for="child in item.children">
-        <menu-tree v-if="child.children&&child.children.length>0" :is-nest="true" :item="child" :key="child.menuId" 
+        <menu-tree v-if="child.children" :is-nest="true" :item="child" :key="child.menuId" 
           :baseIndex="child.menuId+''" class="nest-menu" />
 
         <a v-else :href="child.menuUrl" :key="child.menuId" target="_blank" @click="clickLink(child.menuUrl,$event)">
